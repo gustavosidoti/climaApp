@@ -1,4 +1,4 @@
-😎 #ClimaApp
+# ClimaApp
 
 Es una aplicación en Angular que permite al usuario consultar el clima introduciendo el nombre de una ciudad.
 
@@ -13,7 +13,7 @@ usuario indicar la ciudad, y la tabla solo mostrará las consultas hechas a esa 
 
 Adememás, contiene un botón para borrar el historial de consultas que limpia la tabla.
 
-⌨️ ##Instalación
+## Instalación ⌨️
 
  * Tener instalado [npm](https://docs.npmjs.com/cli/v8/commands/npm-install)
  * Descargar este proyecto
