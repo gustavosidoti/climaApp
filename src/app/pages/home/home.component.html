@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="m-5">
+
+    <h1>Buscador de ciudades</h1>
+    <hr>
+    <h1></h1>
+
+    <div class="container">
+        <form [formGroup]="forma" (ngSubmit)="obtenerClima()" class=" login100-form validate-form flex-sb flex-w ">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="ciudad" placeholder="Buscar...">
+                    </div>
+                </div>
+                <div class="container">
+                    <button class="btn btn-outline-success" type=" submit ">
+                    Buscar
+                </button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="wheathers" class="card mt-3" style="width: 18rem;">
+
+            <div class="card-body ">
+                <h5 class="card-title ">Tiempo en {{wheathers.name}}</h5>
+                <p class="card-text ">{{wheathers.weather[0].description}}</p>
+            </div>
+            <ul class="list-group list-group-flush ">
+                <li *ngIf="wheathers" class="list-group-item ">Temperatura: {{wheathers.main.temp}} °C</li>
+                <li *ngIf="wheathers" class="list-group-item ">Temperatura Mínima: {{wheathers.main.temp_min}} °C</li>
+                <li *ngIf="wheathers" class="list-group-item ">Temperatura Máxima: {{wheathers.main.temp_max}} °C</li>
+            </ul>
+
+        </div>
+
+
+    </div>
+</div>

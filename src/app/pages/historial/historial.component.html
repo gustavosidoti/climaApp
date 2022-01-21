@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="m-5">
+    <div class="container">
+        <h1>Historial</h1>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="filterPost" placeholder="Filtrar..." [(ngModel)]="filterHistorial" name="filterHistorial">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngIf="historiales" class="col">
+                <table class=" table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Ciudad</th>
+                            <th>Tiempo</th>
+                            <th>Temperatura</th>
+                            <th>Temperatura Mínima</th>
+                            <th>Temperatura Máxima</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor=" let historial of historiales | filter:filterHistorial | paginate: { itemsPerPage: 5, currentPage: page } ">
+                            <td>{{historial.ciudad}}</td>
+                            <td>{{historial.pronostico}}</td>
+                            <td>{{historial.temperatura}}</td>
+                            <td>{{historial.temperaturaMinima}}</td>
+                            <td>{{historial.temperaturaMaxima}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="page=$event " previousLabel="Anterior " nextLabel="Siguiente "></pagination-controls>
+            </div>
+            <div *ngIf="!historiales" class="alert alert-warning text-center mt-3">
+                <h4 class="alert-heading">No hay registros</h4>
+                <p>
+                    <i class="fa fa-exclamation fa-2x"></i>
+                </p>
+            </div>
+        </div>
+        <button class="btn btn-danger mt-3" (click)="borrarHistorial()"> Borrar Historial</button>
+    </div>
+</div>
