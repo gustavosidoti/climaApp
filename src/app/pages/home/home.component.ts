@@ -8,6 +8,7 @@ import { Weather, Main } from '../../interfaces/clima-response';
 import { ClimaCiudadModel } from 'src/app/models/climaCiudad.models';
 import { map } from 'rxjs/operators';
 import { async } from '@angular/core/testing';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(){ }
-
+  // Formulario Reactivo
   crearFormulario(){
     this.forma = this.fb.group({
       ciudad: ['', Validators.required]
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit {
   
   
    obtenerClima = async() =>{
-    
+    Swal.showLoading();
     this.climaCiudad.ciudad = this.forma.value['ciudad'];
 
     try{
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
       .subscribe( resp => {
       
       this.wheathers = resp;
-
+      Swal.close();
       this.guardarHistorial();
       
       })
