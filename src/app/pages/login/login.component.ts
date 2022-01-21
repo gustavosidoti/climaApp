@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { UsuarioModel } from '../../models/usuario.model';
 import { AuthService } from '../../services/auth.service';
 
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 @Component({
   selector: 'app-login',
@@ -38,11 +38,7 @@ export class LoginComponent implements OnInit {
     if( form.invalid ){ return; }
     
     // Ejecutamos el sweet alert para una mejor presentación
-    Swal.fire({  
-      allowOutsideClick: false, 
-      icon: 'info', 
-      text: 'Espera por Favor..'}); 
-    Swal.showLoading();
+    
 
     this.auth.login( this.usuario )
         .subscribe( resp => {
@@ -50,7 +46,7 @@ export class LoginComponent implements OnInit {
           console.log(resp);
 
           // cierre del sweetalert
-          Swal.close();
+          
          
           // botón recordar usuario
           if( this.recordarme ){
@@ -64,10 +60,7 @@ export class LoginComponent implements OnInit {
 
           console.log(err.error.error.message);
           // Ejecutamos el sweet alert para una mejor presentación del error
-          Swal.fire({  
-          icon: 'error',
-          title: 'Error al autenticar', 
-          text: err.error.error.message});
+         
         })
   }
 

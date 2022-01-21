@@ -47,14 +47,14 @@ export class HomeComponent implements OnInit {
       
       this.climaService.getClimaCiudad(this.climaCiudad)
       .subscribe( resp => {
-      console.log('objeto recibido',resp);
+      
       this.wheathers = resp;
 
       this.guardarHistorial();
       
       })
  
-      console.log(this.climaCiudad);
+      
 
     } catch (error) {
       

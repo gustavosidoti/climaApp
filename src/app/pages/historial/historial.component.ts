@@ -3,7 +3,7 @@ import { ClimaService } from '../../services/clima.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 @Component({
   selector: 'app-historial',
@@ -25,37 +25,46 @@ export class HistorialComponent implements OnInit {
 
       this.cargarHistorial();
       // cierre del sweetalert
-      Swal.close();
+      
   }
 
-  cargarHistorial() {
-    this.climaService.getConsultaHistorial()
+  cargarHistorial= async() =>{
+    
+    try {
+      this.climaService.getConsultaHistorial()
         .subscribe( historial => {
          this.historiales = historial;
-
+          
+         // si el historial viene vacío retornamos
+         if(historial === null){
+           return;
+         }
+          // esta funcionalidad sirve para realizar el arreglo de objetos que necesita la tabla
          let me = this;
          me.historiales = Object.keys(me.historiales).map(function(key) {return me.historiales [key];});
+         
         })
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   borrarHistorial = async() =>{
     
-    this.climaService.deleteBorrarHistorial()
-        .subscribe();
-        window.location.reload();
-        Swal.fire({  
-          allowOutsideClick: false, 
-          icon: 'info', 
-          text: 'Espera por Favor..',
-          timer: 2000,
+      await this.climaService.deleteBorrarHistorial().subscribe();
+      
+      this.climaService.getConsultaHistorial()
+        .subscribe( historial => {
+         this.historiales = historial;
           
-        });
-         
-        Swal.showLoading();
-        
-        
-        
-        
+         // si el historial viene vacío retornamos
+         if(historial === null){
+          window.location.reload(); 
+          return;
+         }
+      })
+     
   }
 
 }

@@ -44,9 +44,12 @@ export class ClimaService {
 
   }
 
-  deleteBorrarHistorial() {
-    return this.http.delete(`${ this.url }/climaCiudad.json`);
-  }
+    deleteBorrarHistorial() {
+          
+          return this.http.delete(`${ this.url }/climaCiudad.json`);
+
+
+    }
 
 
 
